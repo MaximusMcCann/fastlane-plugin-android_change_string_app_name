@@ -29,7 +29,7 @@ android_change_app_name(newName: "AwesomeNewName", stringsFile: "path/to/your/st
 
 Sets these keys
 
-`ANDROID_CHANGE_APP_NAME_ORIGINAL_NAME : String` = The original value from android:label.
+`ANDROID_CHANGE_STRING_APP_NAME_ORIGINAL_NAME : String` = The original value from android:label.
 
 ## About android_change_app_name_revert
 
