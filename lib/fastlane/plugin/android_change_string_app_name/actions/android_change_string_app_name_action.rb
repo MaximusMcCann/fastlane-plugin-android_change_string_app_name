@@ -13,8 +13,6 @@ module Fastlane
         doc = File.open(stringsFile) { |f|
           @doc = Nokogiri::XML(f)
 
-          puts @doc
-
           originalName = nil
 
           @doc.css("resources string[@name=app_name]").each do |response_node|
