@@ -23,15 +23,15 @@ stringsFile: String (Optional) // The location to your strings.xml file.  Defaul
 Usage:
 
 ```
-android_change_app_name(newName: "AwesomeNewName")
-android_change_app_name(newName: "AwesomeNewName", stringsFile: "path/to/your/strings.xml")
+android_change_string_app_name(newName: "AwesomeNewName")
+android_change_string_app_name(newName: "AwesomeNewName", stringsFile: "path/to/your/strings.xml")
 ```
 
 Sets these keys
 
 `ANDROID_CHANGE_STRING_APP_NAME_ORIGINAL_NAME : String` = The original value from android:label.
 
-## About android_change_app_name_revert
+## About android_change_string_app_name_revert
 
 Reverts the strings.xml app_name attribute to the prior ANDROID_CHANGE_STRING_APP_NAME_ORIGINAL_NAME value.  Errors if ANDROID_CHANGE_STRING_APP_NAME_ORIGINAL_NAME is not set.
 
@@ -43,8 +43,8 @@ stringsFile: String (Optional) // The location to your strings.xml file.  Defaul
 Usage:
 
 ```
-android_change_app_name_revert()
-android_change_app_name_revert(stringsFile: "path/to/your/strings.xml")
+android_change_string_app_name_revert()
+android_change_string_app_name_revert(stringsFile: "path/to/your/strings.xml")
 
 ```
 
