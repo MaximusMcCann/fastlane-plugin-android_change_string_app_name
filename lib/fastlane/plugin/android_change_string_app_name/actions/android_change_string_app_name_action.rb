@@ -9,8 +9,9 @@ module Fastlane
 
         newName = params[:newName]
         stringsFile = params[:stringsFile]
+        encoding = params[:encoding]
 
-        doc = File.open(stringsFile) { |f|
+        doc = File.open(stringsFile, "r:#{encoding}") { |f|
           @doc = Nokogiri::XML(f)
 
           originalName = nil
@@ -24,7 +25,7 @@ module Fastlane
 
           Actions.lane_context[SharedValues::ANDROID_CHANGE_STRING_APP_NAME_ORIGINAL_NAME] = originalName
 
-          File.write(stringsFile, @doc.to_xml)
+          File.write(stringsFile, @doc.to_xml(encoding: encoding))
         }
 
       end
@@ -57,7 +58,13 @@ module Fastlane
                                description: "Optional custom location for strings.xml",
                                   optional: false,
                                       type: String,
-                             default_value: "app/src/main/res/values/strings.xml")
+                             default_value: "app/src/main/res/values/strings.xml"),
+          FastlaneCore::ConfigItem.new(key: :encoding,
+                                  env_name: "",
+                               description: "Optional encoding for string.xml",
+                                  optional: false,
+                                      type: String,
+                             default_value: "UTF-8")
         ]
       end
 
@@ -77,6 +84,7 @@ module Fastlane
         require 'nokogiri'
 
         oldName = Actions.lane_context[SharedValues::ANDROID_CHANGE_STRING_APP_NAME_ORIGINAL_NAME]
+        encoding = params[:encoding]
 
         if oldName.to_s.strip.length != 0
           stringsFile = params[:stringsFile]
@@ -84,7 +92,7 @@ module Fastlane
           UI.error("no string for ANDROID_CHANGE_STRING_APP_NAME_ORIGINAL_NAME.  Have you run android_change_string_app_name?")
         end
 
-        doc = File.open(stringsFile) { |f|
+        doc = File.open(stringsFile, "r:#{encoding}") { |f|
           @doc = Nokogiri::XML(f)
 
           @doc.css("resources string[@name=app_name]").each do |response_node|
@@ -93,7 +101,7 @@ module Fastlane
             UI.message("Reverting app name to: #{oldName}")
           end
 
-          File.write(stringsFile, @doc.to_xml)
+          File.write(stringsFile, @doc.to_xml(encoding: encoding))
         }
 
       end
@@ -121,7 +129,13 @@ module Fastlane
                                description: "Optional custom location for strings.xml",
                                   optional: false,
                                       type: String,
-                             default_value: "app/src/main/res/values/strings.xml")
+                             default_value: "app/src/main/res/values/strings.xml"),
+          FastlaneCore::ConfigItem.new(key: :encoding,
+                                  env_name: "",
+                               description: "Optional encoding for string.xml",
+                                  optional: false,
+                                      type: String,
+                             default_value: "UTF-8")
         ]
       end
 
